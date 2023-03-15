@@ -21,9 +21,9 @@ cd $BASEDIR
 echo 'Building anserini'
 git clone https://github.com/castorini/anserini.git && \
 sudo apt install maven && mvn --version && \
-cd anserini && mvn clean package appassembler:assemble
+cd anserini && mvn clean package appassembler:assemble -Dmaven.test.skip=true
 cd $BASEDIR
 
 echo 'Copying jars to pyserini'
 mkdir -pv pyserini/pyserini/resources/jars/ && \
-cp anserini/target/anserini-*-fatjar.jar pyserini/pyserini/resources/jars/'
+cp anserini/target/anserini-*-fatjar.jar pyserini/pyserini/resources/jars/
