@@ -1,0 +1,43 @@
+# -*-Python-*-
+# pretrained checkpoint and configs for t5-base
+# THIS MUST BE PLACED FIRST, FOR OTHER SETTINGS BEING ABLE TO OVERRIDE IT
+include 'gs://t5-data/pretrained_models/base/operative_config.gin'
+
+
+# dataset definition (t5 default)
+# modified 'dataset.gin'
+import t5.models.mesh_transformer
+# Override these values
+
+# Plumbing
+MIXTURE_NAME = 'doc2query_train'
+utils.run.train_dataset_fn = @t5.models.mesh_transformer.mesh_train_dataset_fn
+mesh_train_dataset_fn.mixture_or_task_name = %MIXTURE_NAME
+mesh_transformer.get_vocabulary.mixture_or_task_name = %MIXTURE_NAME
+utils.run.vocabulary = @mesh_transformer.get_vocabulary()
+
+import tasks
+
+# approximately 100 epochs = 100 * 10_000 / 128 = 7812.5 ~ 7820
+PRETRAINED_STEPS = 999900
+FINETUNE_STEPS = 7820
+# utils.run.train_steps = %PRETRAINED_STEPS + %FINETUNE_STEPS NAO FUNCIONA
+utils.run.train_steps = 1007720
+
+
+run.dataset_split = 'train'
+utils.run.batch_size = ("sequences_per_batch", 128)
+utils.run.save_checkpoints_steps = 78
+utils.run.iterations_per_loop = 78
+utils.run.keep_checkpoint_max = None
+utils.run.sequence_length = {'inputs': 330, 'targets': 64}
+# utils.run.init_checkpoint = already included in operative_config.gin
+
+# deterministic training
+mesh_train_dataset_fn.seed = 12345
+utils.run.skip_seen_data = True
+mesh_train_dataset_fn.use_cached = True
+utils.run.seen_data_init_step = %PRETRAINED_STEPS
+
+# constant learning rate of 0.001
+include 'learning_rate_schedules/constant_0_001.gin'
