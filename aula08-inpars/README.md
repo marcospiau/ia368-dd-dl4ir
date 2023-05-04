@@ -1,10 +1,10 @@
 # Contents
 
 - `01-baseline-monot5-base-castorini.ipynb`: pipeline validation using castorini code
-- `02-baseline-monot5-base-likelihood-scoring.ipynb`: pipeline using t5 score_eval mode
-- `03_synthetic_data_generation.ipynb`: sinthetic data generatin pipeline
+- `02-baseline-monot5-base-likelihood-scoring.ipynb`: pipeline using using log-likelihood scoring
+- `03_synthetic_data_generation.ipynb`: synthetic data generatin pipeline
+- `04_finetune_v1.ipynb`: model finetuning and eval using log-likelihood scoring
 
-# Results (so far)
-- BM25: `{'recip_rank': '0.8529', 'recall_1000': '0.3955', 'ndcg_cut_10': '0.5947'}`
-- monot5-base castorini default: `{'recip_rank': '0.8607', 'recall_1000': '0.3955', 'ndcg_cut_10': '0.7178'}`
-- monot5-base score_eval mode (likelihood): `{'recip_rank': '0.8585', 'recall_1000': '0.3955', 'ndcg_cut_10': '0.7174'}`
+# Results
+
+<img width="671" alt="image" src="https://user-images.githubusercontent.com/18710892/236247962-cb8a083d-458f-4bcc-a241-29bfd83bb2c0.png">
