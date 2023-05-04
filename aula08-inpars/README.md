@@ -6,5 +6,4 @@
 - `04_finetune_v1.ipynb`: model finetuning and eval using log-likelihood scoring
 
 # Results
-
-<img width="671" alt="image" src="https://user-images.githubusercontent.com/18710892/236247962-cb8a083d-458f-4bcc-a241-29bfd83bb2c0.png">
+<img width="1152" alt="image" src="https://user-images.githubusercontent.com/18710892/236248550-b957d2d6-3b42-4607-926a-f0fb1a0ce366.png">
